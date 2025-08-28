@@ -10,7 +10,7 @@ import {
 
 // Your Firebase config
 const firebaseConfig = {
-  apiKey: "AIzaSyBFhvhCnOc1va9VsWnJU47q2YWef78DUU4",
+  apiKey: "",
   authDomain: "mental-wellness-website-1a03e.firebaseapp.com",
   projectId: "mental-wellness-website-1a03e",
   storageBucket: "mental-wellness-website-1a03e.firebasestorage.app",
