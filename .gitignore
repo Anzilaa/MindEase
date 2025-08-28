@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .env
 node_modules/
 dist/
@@ -5,6 +6,8 @@ build/
 .vscode/
 .DS_Store
 *.log
+=======
+>>>>>>> 4ef19bb1389fa5166b06d7b6f12e66195abdda33
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
