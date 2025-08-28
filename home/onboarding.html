@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Onboarding Form</title>
+  </head>
+  <body>
+    <h1>Welcome to Your Wellness Journey 🌱</h1>
+    <form id="onboarding-form">
+      <!-- Preferred Name -->
+      <label for="name">Preferred Name:</label><br />
+      <input type="text" id="name" name="name" required /><br /><br />
+
+      <!-- Age -->
+      <label for="age">Age:</label><br />
+      <input
+        type="number"
+        id="age"
+        name="age"
+        min="1"
+        max="120"
+        required
+      /><br /><br />
+
+      <!-- Reminders -->
+      <label>Would you like reminders?</label><br />
+      <label
+        ><input type="radio" name="reminders" value="yes" required /> Yes</label
+      >
+      <label><input type="radio" name="reminders" value="no" /> No</label
+      ><br /><br />
+
+      <!-- Content preference -->
+      <label>Do you prefer short motivational quotes or detailed guides?</label
+      ><br />
+      <label
+        ><input type="radio" name="contentType" value="quotes" required /> Short
+        motivational quotes</label
+      >
+      <label
+        ><input type="radio" name="contentType" value="guides" /> Detailed
+        guides</label
+      ><br /><br />
+
+      <!-- Preferred notification time -->
+      <label for="notifTime"
+        >What’s your preferred time to receive notifications?</label
+      ><br />
+      <select name="notifTime" id="notifTime" required>
+        <option value="">--Select--</option>
+        <option value="morning">Morning</option>
+        <option value="afternoon">Afternoon</option>
+        <option value="evening">Evening</option></select
+      ><br /><br />
+
+      <!-- Main goal -->
+      <label for="goal">What's your main goal with this app?</label><br />
+      <select name="goal" id="goal" required>
+        <option value="">--Select--</option>
+        <option value="stress-relief">Stress relief</option>
+        <option value="better-focus">Better focus</option>
+        <option value="mood-tracking">Mood tracking</option>
+        <option value="other">Other</option></select
+      ><br /><br />
+
+      <button type="submit">Start My Wellness Journey 🚀</button>
+    </form>
+
+    <script type="module" src="onboarding.js"></script>
+  </body>
+</html>

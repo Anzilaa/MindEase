@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MindEase</title>
+    <style>
+      /* Dropdown animation */
+      #dropdown-menu {
+        display: none;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: opacity 0.25s ease, transform 0.25s ease;
+      }
+      #dropdown-menu.show {
+        display: block;
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Navbar styling */
+      .navbar {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        width: 100%;
+        margin-top: 16px;
+      }
+      .logo-section {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .nav-links a {
+        margin-right: 24px;
+        color: #4f46e5;
+        text-decoration: none;
+        font-weight: 500;
+      }
+      .nav-links a:last-child {
+        margin-right: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="min-height: 100vh; position: relative">
+      <!-- Navbar -->
+      <div class="navbar">
+        <!-- Left side: Logo + Hamburger -->
+        <div class="logo-section">
+          <span style="font-weight: bold; font-size: 1.5em; letter-spacing: 2px"
+            >MindEase</span
+          >
+
+          <!-- Hamburger below logo -->
+          <div style="margin-top: 8px; position: relative">
+            <button
+              id="dropdown-toggle"
+              style="
+                background: none;
+                border: none;
+                cursor: pointer;
+                outline: none;
+                position: relative;
+                z-index: 3100;
+              "
+            >
+              <svg width="32" height="32" viewBox="0 0 32 32">
+                <rect y="7" width="32" height="3" rx="1.5" fill="#333" />
+                <rect y="14" width="32" height="3" rx="1.5" fill="#333" />
+                <rect y="21" width="32" height="3" rx="1.5" fill="#333" />
+              </svg>
+            </button>
+
+            <!-- Dropdown Menu -->
+            <div
+              id="dropdown-menu"
+              style="
+                position: absolute;
+                left: 0;
+                top: 40px;
+                background: #f4f4f4;
+                box-shadow: 0 2px 8px #0002;
+                border-radius: 6px;
+                padding: 12px 0;
+                min-width: 180px;
+                z-index: 3200;
+              "
+            >
+              <nav style="display: flex; flex-direction: column; gap: 0">
+                <a
+                  href="main.html"
+                  style="
+                    padding: 10px 24px;
+                    color: #333;
+                    text-decoration: none;
+                    font-weight: 500;
+                  "
+                  >Home Page</a
+                >
+                <a
+                  href="profile.html"
+                  style="
+                    padding: 10px 24px;
+                    color: #333;
+                    text-decoration: none;
+                    font-weight: 500;
+                  "
+                  >Profile</a
+                >
+                <a
+                  href="emergency.html"
+                  style="
+                    padding: 10px 24px;
+                    color: #333;
+                    text-decoration: none;
+                    font-weight: 500;
+                  "
+                  >Emergency Contacts</a
+                >
+                <a
+                  href="#resources"
+                  style="
+                    padding: 10px 24px;
+                    color: #333;
+                    text-decoration: none;
+                    font-weight: 500;
+                  "
+                  >Resources</a
+                >
+                <a
+                  href="focus.html"
+                  style="
+                    padding: 10px 24px;
+                    color: #333;
+                    text-decoration: none;
+                    font-weight: 500;
+                  "
+                  >Focus</a
+                >
+                <a
+                  href="#news"
+                  style="
+                    padding: 10px 24px;
+                    color: #333;
+                    text-decoration: none;
+                    font-weight: 500;
+                  "
+                  >News</a
+                >
+                <a
+                  href="#reports"
+                  style="
+                    padding: 10px 24px;
+                    color: #333;
+                    text-decoration: none;
+                    font-weight: 500;
+                  "
+                  >Reports</a
+                >
+                <a
+                  href="#home"
+                  style="
+                    padding: 10px 24px;
+                    color: #333;
+                    text-decoration: none;
+                    font-weight: 500;
+                  "
+                  >Home</a
+                >
+              </nav>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right side: Main navigation -->
+        <div class="nav-links">
+          <a href="main.html">Home</a>
+          <a href="../root/about.html">About Us</a>
+          <a href="contact.html">Contact</a>
+          <a href="feedback.html">Feedback</a>
+        </div>
+      </div>
+
+      <!-- Affirmation Quote -->
+      <div
+        id="affirmation-quote"
+        style="
+          font-size: 1.2em;
+          margin-bottom: 18px;
+          color: #4f46e5;
+          text-align: center;
+        "
+      ></div>
+
+      <!-- Journal Link -->
+      <div style="text-align: center; margin: 32px auto">
+        <a
+          href="journal.html"
+          style="
+            color: #4f46e5;
+            font-weight: bold;
+            text-decoration: underline;
+            font-size: 1.1em;
+          "
+          >Go to Journal</a
+        >
+        <br /><br />
+        <a
+          href="../components/mood.html"
+          style="
+            color: #22c55e;
+            font-weight: bold;
+            text-decoration: underline;
+            font-size: 1.1em;
+          "
+          >Daily Mood Form</a
+        >
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const toggleBtn = document.getElementById("dropdown-toggle");
+        const dropdownMenu = document.getElementById("dropdown-menu");
+
+        toggleBtn.addEventListener("click", function () {
+          dropdownMenu.classList.toggle("show");
+        });
+
+        // Close if clicking outside
+        document.addEventListener("click", function (e) {
+          if (
+            !toggleBtn.contains(e.target) &&
+            !dropdownMenu.contains(e.target)
+          ) {
+            dropdownMenu.classList.remove("show");
+          }
+        });
+      });
+    </script>
+    <script src="../root/affirmations.js" defer></script>
+  </body>
+</html>

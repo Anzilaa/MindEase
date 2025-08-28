@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Feedback Form</title>
+  </head>
+
+  <body>
+    <table width="100%" style="margin-top: 16px">
+      <tr>
+        <td
+          align="left"
+          style="font-weight: bold; font-size: 1.5em; letter-spacing: 2px"
+        >
+          MindEase
+        </td>
+        <td align="right">
+          <a
+            href="main.html"
+            style="
+              margin-right: 24px;
+              color: #4f46e5;
+              text-decoration: none;
+              font-weight: 500;
+            "
+            >Home</a
+          >
+          <a
+            href="../root/about.html"
+            style="
+              margin-right: 24px;
+              color: #4f46e5;
+              text-decoration: none;
+              font-weight: 500;
+            "
+            >About Us</a
+          >
+          <a
+            href="contact.html"
+            style="
+              margin-right: 24px;
+              color: #4f46e5;
+              text-decoration: none;
+              font-weight: 500;
+            "
+            >Contact</a
+          >
+          <a
+            href="feedback.html"
+            style="color: #4f46e5; text-decoration: none; font-weight: 500"
+            >Feedback</a
+          >
+        </td>
+      </tr>
+    </table>
+    <h2>Feedback Form</h2>
+
+    <form id="feedbackForm">
+      <input
+        type="text"
+        id="name"
+        placeholder="Your Name"
+        required
+      /><br /><br />
+      <textarea id="message" placeholder="Your Message" required></textarea
+      ><br /><br />
+      <button type="submit">Submit</button>
+    </form>
+
+    <script type="module">
+      import { db } from "./firebase.js";
+      import {
+        collection,
+        addDoc,
+      } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+
+      const form = document.getElementById("feedbackForm");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const name = document.getElementById("name").value.trim();
+        const message = document.getElementById("message").value.trim();
+
+        try {
+          await addDoc(collection(db, "feedback"), {
+            name,
+            message,
+            timestamp: new Date(),
+          });
+          alert("✅ Feedback submitted successfully!");
+          form.reset();
+        } catch (err) {
+          console.error("Error submitting feedback:", err);
+          alert("❌ Failed to submit feedback: " + err.message);
+        }
+      });
+    </script>
+  </body>
+</html>

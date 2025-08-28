@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact</title>
+  </head>
+  <body>
+    <table width="100%" style="margin-top: 16px">
+      <tr>
+        <td
+          align="left"
+          style="font-weight: bold; font-size: 1.5em; letter-spacing: 2px"
+        >
+          MindEase
+        </td>
+        <td align="right">
+          <a
+            href="main.html"
+            style="
+              margin-right: 24px;
+              color: #4f46e5;
+              text-decoration: none;
+              font-weight: 500;
+            "
+            >Home</a
+          >
+          <a
+            href="../root/about.html"
+            style="
+              margin-right: 24px;
+              color: #4f46e5;
+              text-decoration: none;
+              font-weight: 500;
+            "
+            >About Us</a
+          >
+          <a
+            href="contact.html"
+            style="
+              margin-right: 24px;
+              color: #4f46e5;
+              text-decoration: none;
+              font-weight: 500;
+            "
+            >Contact</a
+          >
+          <a
+            href="feedback.html"
+            style="color: #4f46e5; text-decoration: none; font-weight: 500"
+            >Feedback</a
+          >
+        </td>
+      </tr>
+    </table>
+
+    <main>
+      <h1>Contact Us</h1>
+      <p>
+        If you have any questions, feedback, or collaboration ideas, we’d love
+        to hear from you.
+      </p>
+
+      <form id="contactForm">
+        <label for="name">Your Name:</label><br />
+        <input type="text" id="name" name="name" required /><br /><br />
+
+        <label for="subject">Reason:</label><br />
+        <input type="text" id="subject" name="subject" required /><br /><br />
+
+        <label for="message">Message:</label><br />
+        <textarea id="message" name="message" rows="5" required></textarea
+        ><br /><br />
+
+        <button type="submit">Send</button>
+      </form>
+
+      <h3>Submitted Contacts:</h3>
+      <div id="contactList"></div>
+    </main>
+
+    <script type="module" src="contact.js"></script>
+  </body>
+</html>

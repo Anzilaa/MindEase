@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <script type="module" src="auth.js" defer></script>
+    <script src="affirmations.js" defer></script>
+  </head>
+  <body>
+    <div
+      id="affirmation-quote"
+      style="
+        font-size: 1.2em;
+        margin-bottom: 18px;
+        color: #4f46e5;
+        text-align: center;
+      "
+    ></div>
+    <h2>Login</h2>
+    <form id="login-form">
+      <input
+        type="email"
+        id="login-email"
+        placeholder="Email"
+        required
+        pattern="[a-zA-Z0-9._%+-]+@gmail\.com"
+        title="Only Gmail addresses are allowed"
+      />
+      <input
+        type="password"
+        id="login-password"
+        placeholder="Password"
+        required
+      />
+      <!-- keep link but prevent auto redirect, JS will handle it -->
+      <a href="../home/main.html">
+        <button type="submit">Login</button>
+      </a>
+    </form>
+
+    <!-- same for google -->
+    <a href="../home/main.html">
+      <button type="button" id="google-login">Login with Google</button>
+    </a>
+
+    <p>New here? <a href="signup.html">Sign Up</a></p>
+  </body>
+</html>

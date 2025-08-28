@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Main Home</title>
+    <style>
+      /* Dark background overlay */
+      .popup-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      /* Popup box */
+      .popup {
+        background: white;
+        padding: 20px 30px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        max-width: 300px;
+        width: 90%;
+      }
+
+      /* Close button */
+      .popup button {
+        margin-top: 15px;
+        padding: 8px 15px;
+        background: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .popup button:hover {
+        background: #45a049;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Welcome to Home</h1>
+
+    <!-- Popup Structure -->
+    <div class="popup-overlay" id="popup">
+      <div class="popup">
+        <h2>Welcome to Your Calm Space</h2>
+        <p>
+          Take a deep breath — you’re in a space made just for you. Here, every
+          step you take is a step toward clarity, balance, and peace.
+        </p>
+        <button type="button" onclick="window.location.href='main.html'">
+          Begin My Journey
+        </button>
+      </div>
+    </div>
+
+    <script src="pop.js"></script>
+  </body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Focus Timer</title>
+  </head>
+  <body>
+    <div class="pomodoro-container">
+      <h2>Focus</h2>
+      <div>
+        <input
+          type="number"
+          id="durationInput"
+          min="1"
+          max="120"
+          placeholder="Minutes"
+        />
+        <button id="startBtn">Start</button>
+      </div>
+      <div id="timerDisplay">00:00</div>
+      <div class="controls">
+        <button id="breakBtn">Take a Break</button>
+        <button id="continueBtn">Continue</button>
+        <button id="forfeitBtn">Forfeit</button>
+      </div>
+    </div>
+    <script type="module" src="focus.js"></script>
+  </body>
+</html>
