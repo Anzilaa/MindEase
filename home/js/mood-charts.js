@@ -72,13 +72,12 @@ function getWeekKeys() {
   return week;
 }
 
-
 const EMOTIONS = [
-  { key: 'happy', label: 'Happy', color: '#22c55e' },
-  { key: 'sad', label: 'Sad', color: '#3b82f6' },
-  { key: 'anxious', label: 'Anxious', color: '#f59e42' },
-  { key: 'calm', label: 'Calm', color: '#38bdf8' },
-  { key: 'anger', label: 'Anger', color: '#ef4444' }
+  { key: "happy", label: "Happy", color: "#22c55e" },
+  { key: "sad", label: "Sad", color: "#3b82f6" },
+  { key: "anxious", label: "Anxious", color: "#f59e42" },
+  { key: "calm", label: "Calm", color: "#38bdf8" },
+  { key: "anger", label: "Anger", color: "#ef4444" },
 ];
 
 function countMoods(moodDocs) {
@@ -98,12 +97,12 @@ function updateCharts(userId) {
       const moods = [];
       snap.forEach((doc) => moods.push(doc.data()));
       const counts = countMoods(moods);
-      const data = EMOTIONS.map(e => counts[e.key]);
+      const data = EMOTIONS.map((e) => counts[e.key]);
       renderPieChart(
         document.getElementById("daily-mood-chart").getContext("2d"),
         data,
-        EMOTIONS.map(e => e.label),
-        EMOTIONS.map(e => e.color),
+        EMOTIONS.map((e) => e.label),
+        EMOTIONS.map((e) => e.color),
         "Today's Mood"
       );
     }
@@ -116,12 +115,12 @@ function updateCharts(userId) {
       if (weekKeys.includes(doc.id)) weekMoods.push(doc.data());
     });
     const counts = countMoods(weekMoods);
-    const data = EMOTIONS.map(e => counts[e.key]);
+    const data = EMOTIONS.map((e) => counts[e.key]);
     renderPieChart(
       document.getElementById("weekly-mood-chart").getContext("2d"),
       data,
-      EMOTIONS.map(e => e.label),
-      EMOTIONS.map(e => e.color),
+      EMOTIONS.map((e) => e.label),
+      EMOTIONS.map((e) => e.color),
       "This Week's Mood"
     );
   });
