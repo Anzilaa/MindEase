@@ -92,8 +92,6 @@ function renderCalendar(date, moods) {
 	const month = date.getMonth();
 	calendarMonth.textContent = date.toLocaleString('default', { month: 'long', year: 'numeric' });
 
-	// First day of month
-	const firstDay = new Date(year, month, 1).getDay();
 	// Days in month
 	const daysInMonth = new Date(year, month + 1, 0).getDate();
 
@@ -147,6 +145,68 @@ async function fetchMonthMoods(date) {
 // Calendar navigation
 async function updateCalendar() {
 	monthMoods = await fetchMonthMoods(calendarDate);
+	// ...existing code...
+	// UI: Show slider values
+	const energy = document.getElementById('energy');
+	const stress = document.getElementById('stress');
+	const sleep = document.getElementById('sleep');
+	const energyValue = document.getElementById('energy-value');
+	const stressValue = document.getElementById('stress-value');
+	const sleepValue = document.getElementById('sleep-value');
+
+	if (energy) energy.addEventListener('input', () => energyValue.textContent = energy.value);
+	if (stress) stress.addEventListener('input', () => stressValue.textContent = stress.value);
+	if (sleep) sleep.addEventListener('input', () => sleepValue.textContent = sleep.value);
+
+	const moodForm = document.getElementById('mood-form');
+	const moodMessage = document.getElementById('mood-message');
+
+	if (moodForm) {
+		moodForm.addEventListener('submit', async (e) => {
+			e.preventDefault();
+			// Get form values
+			const mood = moodForm.mood.value;
+			const energyVal = parseInt(energy.value);
+			const stressVal = parseInt(stress.value);
+			const sleepVal = parseInt(sleep.value);
+			// Only allow 5 moods
+			const allowedMoods = ['happy', 'sad', 'anxious', 'calm', 'anger'];
+			if (!allowedMoods.includes(mood)) {
+				moodMessage.textContent = "Please select a valid mood.";
+				moodMessage.classList.remove('hidden');
+				return;
+			}
+			// Get user
+			onAuthStateChanged(auth, async (user) => {
+				if (!user) {
+					moodMessage.textContent = "Please log in to save your mood.";
+					moodMessage.classList.remove('hidden');
+					return;
+				}
+				const userId = user.uid;
+				const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+				try {
+					await setDoc(doc(db, "moods", userId, "dates", today), {
+						mood,
+						energy: energyVal,
+						stress: stressVal,
+						sleep: sleepVal
+					});
+					moodForm.reset();
+					energy.value = stress.value = sleep.value = 5;
+					energyValue.textContent = stressValue.textContent = sleepValue.textContent = '5';
+					moodMessage.textContent = "Mood saved!";
+					moodMessage.classList.remove('hidden');
+					setTimeout(() => moodMessage.classList.add('hidden'), 2000);
+					setTimeout(updateCalendar, 500);
+				} catch (err) {
+					moodMessage.textContent = "Error saving mood: " + err.message;
+					moodMessage.classList.remove('hidden');
+					console.error("Error saving mood:", err);
+				}
+			});
+		});
+	}
 	renderCalendar(calendarDate, monthMoods);
 }
 if (prevMonthBtn && nextMonthBtn) {

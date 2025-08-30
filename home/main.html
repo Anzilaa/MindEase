@@ -217,6 +217,24 @@
           >Daily Mood Form</a
         >
       </div>
+
+      <!-- Mood Pie Charts -->
+      <div
+        style="
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 40px;
+          margin: 40px 0;
+        "
+      >
+        <div>
+          <canvas id="daily-mood-chart" width="220" height="220"></canvas>
+        </div>
+        <div>
+          <canvas id="weekly-mood-chart" width="220" height="220"></canvas>
+        </div>
+      </div>
     </div>
 
     <script>
@@ -240,5 +258,6 @@
       });
     </script>
     <script src="../root/affirmations.js" defer></script>
+    <script type="module" src="js/mood-charts.js"></script>
   </body>
 </html>
