@@ -1,8 +1,5 @@
 import { db } from "./firebase.js";
-import {
-  collection,
-  addDoc,
-} from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
 
 const form = document.getElementById("onboarding-form");
 
@@ -26,6 +23,7 @@ form.addEventListener("submit", async (e) => {
       goal,
       timestamp: new Date(),
     });
+
     alert("✅ Onboarding data submitted successfully!");
     form.reset();
     window.location.href = "pop.html";

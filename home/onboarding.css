@@ -1,0 +1,25 @@
+body {
+  background: linear-gradient(135deg, #e0f7fa, #e8f5e9);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.card {
+  border: none;
+  background: #ffffff;
+  border-radius: 20px;   /* change border radius */
+  margin: 40px 0;        /* gap between top and bottom */
+  padding: 30px;         /* extra space inside */
+}
+
+h1 {
+  font-weight: bold;
+}
+
+button {
+  transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 4px 15px rgba(0, 128, 0, 0.3);
+}

@@ -1,0 +1,56 @@
+/* General */
+body {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #1b5e20, #2e7d32, #66bb6a);
+  margin: 0;
+  padding: 0;
+}
+
+/* Navbar */
+.navbar {
+  background: rgba(0, 0, 0, 0.2) !important;
+  backdrop-filter: blur(6px);
+  border-radius: 12px;
+  margin: 15px;
+}
+
+/* Hero Section */
+.hero {
+  height: 50vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("https://via.placeholder.com/1200x500") center/cover no-repeat;
+}
+
+
+.p1{
+  font-size: larger;
+
+}
+
+
+/* CTA Section */
+.cta {
+  background: linear-gradient(135deg, #2e7d32, #66bb6a);
+}
+
+/* Floating Image Animation */
+.floating {
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Footer */
+footer {
+  background: rgba(0, 0, 0, 0.4);
+}

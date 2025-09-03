@@ -4,105 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Landing Page</title>
-    <style>
-      body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-      }
-
-      header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 20px 50px;
-      }
-
-      .logo {
-        font-size: 1.5rem;
-        font-weight: bold;
-      }
-
-      nav a {
-        margin-left: 30px;
-        text-decoration: none;
-        color: #333;
-        font-weight: 500;
-      }
-
-      main {
-        display: flex;
-        height: calc(100vh - 80px);
-      }
-
-      .left {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding: 0 50px;
-      }
-
-      .left h1 {
-        font-size: 3rem;
-        margin-bottom: 20px;
-      }
-
-      .left p {
-        font-size: 1.2rem;
-        margin-bottom: 30px;
-        color: #555;
-      }
-
-      .buttons {
-        display: flex;
-        gap: 15px;
-      }
-
-      .buttons a {
-        text-decoration: none;
-        padding: 12px 25px;
-        border-radius: 5px;
-        font-weight: bold;
-        transition: background 0.3s;
-      }
-
-      .signup-btn {
-        background: #4caf50;
-        color: white;
-      }
-
-      .signup-btn:hover {
-        background: #45a049;
-      }
-
-      .login-btn {
-        background: #2196f3;
-        color: white;
-      }
-
-      .login-btn:hover {
-        background: #1e88e5;
-      }
-
-      .right {
-        flex: 1;
-        background: url("https://via.placeholder.com/600x800") no-repeat
-          center/cover;
-      }
-
-      @media (max-width: 768px) {
-        main {
-          flex-direction: column;
-        }
-        .right {
-          height: 300px;
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="landing.css" />
   </head>
   <body>
     <header>
-      <div class="logo">Your Logo</div>
+      <div class="logo">MindEase</div>
       <nav>
         <a href="about.html">About Us</a>
         <a href="whyus.html">Why us?</a>
@@ -111,17 +17,27 @@
 
     <main>
       <div class="left">
-        <h1>MindEase | Your Mental Wellness Companion</h1>
+        <h1>Your Mental Wellness Companion</h1>
         <p>
           Find calm, clarity, and balance with your personal mental wellness
           companion.
         </p>
         <div class="buttons">
-          <a href="signup.html" class="signup-btn">Sign Up</a>
-          <a href="login.html" class="login-btn">Login</a>
+          <a href="signup.html">Sign Up</a>
+          <a href="login.html">Login</a>
         </div>
       </div>
       <div class="right"></div>
     </main>
+
+    <script>
+      // Small JS animation: glow effect on logo
+      const logo = document.querySelector(".logo");
+      setInterval(() => {
+        logo.style.textShadow =
+          "0 0 15px #a5d6a7, 0 0 30px #66bb6a, 0 0 45px #2e7d32";
+        setTimeout(() => (logo.style.textShadow = "none"), 1500);
+      }, 3000);
+    </script>
   </body>
 </html>

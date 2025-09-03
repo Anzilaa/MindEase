@@ -10,7 +10,7 @@ import {
 
 // Your Firebase config
 const firebaseConfig = {
-  apiKey: "",
+  apiKey: "AIzaSyBFhvhCnOc1va9VsWnJU47q2YWef78DUU4",
   authDomain: "mental-wellness-website-1a03e.firebaseapp.com",
   projectId: "mental-wellness-website-1a03e",
   storageBucket: "mental-wellness-website-1a03e.firebasestorage.app",
@@ -84,3 +84,14 @@ if (googleLoginBtn) {
       .catch((err) => alert(err.message));
   });
 }
+
+import { GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-auth.js";
+
+const provider = new GoogleAuthProvider();
+signInWithPopup(auth, provider)
+  .then((result) => {
+    console.log("User signed in:", result.user);
+  })
+  .catch((error) => {
+    console.error("Error signing in:", error);
+  });

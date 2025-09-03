@@ -1,72 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Onboarding Form</title>
-  </head>
-  <body>
-    <h1>Welcome to Your Wellness Journey 🌱</h1>
-    <form id="onboarding-form">
-      <!-- Preferred Name -->
-      <label for="name">Preferred Name:</label><br />
-      <input type="text" id="name" name="name" required /><br /><br />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Onboarding Form</title>
 
-      <!-- Age -->
-      <label for="age">Age:</label><br />
-      <input
-        type="number"
-        id="age"
-        name="age"
-        min="1"
-        max="120"
-        required
-      /><br /><br />
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="onboarding.css">
+</head>
+<body class="bg-light">
 
-      <!-- Reminders -->
-      <label>Would you like reminders?</label><br />
-      <label
-        ><input type="radio" name="reminders" value="yes" required /> Yes</label
-      >
-      <label><input type="radio" name="reminders" value="no" /> No</label
-      ><br /><br />
+  <div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card shadow-lg p-4 rounded-4 w-100" style="max-width: 600px;">
+      <h1 class="text-center text-success mb-4">Welcome to Your Wellness Journey 🌱</h1>
 
-      <!-- Content preference -->
-      <label>Do you prefer short motivational quotes or detailed guides?</label
-      ><br />
-      <label
-        ><input type="radio" name="contentType" value="quotes" required /> Short
-        motivational quotes</label
-      >
-      <label
-        ><input type="radio" name="contentType" value="guides" /> Detailed
-        guides</label
-      ><br /><br />
+      <form id="onboarding-form" class="needs-validation" novalidate>
+        
+        <!-- Preferred Name -->
+        <div class="mb-3">
+          <label for="name" class="form-label">Preferred Name</label>
+          <input type="text" id="name" name="name" class="form-control" placeholder="Enter your name" required>
+        </div>
 
-      <!-- Preferred notification time -->
-      <label for="notifTime"
-        >What’s your preferred time to receive notifications?</label
-      ><br />
-      <select name="notifTime" id="notifTime" required>
-        <option value="">--Select--</option>
-        <option value="morning">Morning</option>
-        <option value="afternoon">Afternoon</option>
-        <option value="evening">Evening</option></select
-      ><br /><br />
+        <!-- Age -->
+        <div class="mb-3">
+          <label for="age" class="form-label">Age</label>
+          <input type="number" id="age" name="age" class="form-control" min="1" max="120" placeholder="Enter your age" required>
+        </div>
 
-      <!-- Main goal -->
-      <label for="goal">What's your main goal with this app?</label><br />
-      <select name="goal" id="goal" required>
-        <option value="">--Select--</option>
-        <option value="stress-relief">Stress relief</option>
-        <option value="better-focus">Better focus</option>
-        <option value="mood-tracking">Mood tracking</option>
-        <option value="other">Other</option></select
-      ><br /><br />
+        <!-- Reminders -->
+        <div class="mb-3">
+          <label class="form-label">Would you like reminders?</label>
+          <div class="form-check">
+            <input type="radio" name="reminders" value="yes" class="form-check-input" required>
+            <label class="form-check-label">Yes</label>
+          </div>
+          <div class="form-check">
+            <input type="radio" name="reminders" value="no" class="form-check-input">
+            <label class="form-check-label">No</label>
+          </div>
+        </div>
 
-      <button type="submit">Start My Wellness Journey 🚀</button>
-    </form>
+        <!-- Content preference -->
+        <div class="mb-3">
+          <label class="form-label">Content Preference</label>
+          <div class="form-check">
+            <input type="radio" name="contentType" value="quotes" class="form-check-input" required>
+            <label class="form-check-label">Short motivational quotes</label>
+          </div>
+          <div class="form-check">
+            <input type="radio" name="contentType" value="guides" class="form-check-input">
+            <label class="form-check-label">Detailed guides</label>
+          </div>
+        </div>
 
-    <script type="module" src="onboarding.js"></script>
-  </body>
+        <!-- Preferred notification time -->
+        <div class="mb-3">
+          <label for="notifTime" class="form-label">Preferred notification time</label>
+          <select name="notifTime" id="notifTime" class="form-select" required>
+            <option value="">--Select--</option>
+            <option value="morning">Morning</option>
+            <option value="afternoon">Afternoon</option>
+            <option value="evening">Evening</option>
+          </select>
+        </div>
+
+        <!-- Main goal -->
+        <div class="mb-3">
+          <label for="goal" class="form-label">Main Goal</label>
+          <select name="goal" id="goal" class="form-select" required>
+            <option value="">--Select--</option>
+            <option value="stress-relief">Stress relief</option>
+            <option value="better-focus">Better focus</option>
+            <option value="mood-tracking">Mood tracking</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <!-- Submit button -->
+        <div class="d-grid">
+          <button type="submit" class="btn btn-success btn-lg rounded-pill">
+            Start My Wellness Journey 🚀
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Custom JS -->
+  <script type="module" src="onboarding.js"></script>
+</body>
 </html>

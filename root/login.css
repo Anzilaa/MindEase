@@ -1,0 +1,44 @@
+.bg-light-green-gradient {
+  background: linear-gradient(135deg, #d9f0e6, #b4f8c8, #9ee9bb);
+}
+
+.glass-morph-light {
+  background: rgba(255,255,255,0.89);
+  backdrop-filter: blur(7px);
+  border-radius: 26px;
+  box-shadow: 0 4px 28px rgba(120, 180, 120, 0.07);
+}
+
+.light-green-heading {
+  color: #5dd39e;
+  font-weight: 800;
+  text-shadow: 0 2px 16px #b4f8c844;
+}
+
+.light-green-label {
+  color: #54d69b !important;
+  font-weight: 600;
+}
+
+.light-green-input {
+  border: 2px solid #b4f8c8 !important;
+  background: #e2fdeb !important;
+}
+.light-green-input:focus {
+  border-color: #52e2a7 !important;
+  box-shadow: 0 0 0 0.19rem #a3efc155;
+}
+
+.btn-light-green {
+  background: linear-gradient(90deg, #9ee9bb 5%, #5dd39e 95%);
+  color: #fff;
+  border: none;
+  font-weight: bold;
+  box-shadow: 0 2px 10px #5dd39e44;
+  transition: background 0.24s, box-shadow 0.24s;
+}
+
+.btn-light-green:hover {
+  background: linear-gradient(90deg, #5dd39e 5%, #b4f8c8 95%);
+  box-shadow: 0 4px 24px #5dd39e66;
+}
