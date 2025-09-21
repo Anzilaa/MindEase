@@ -316,7 +316,79 @@
             border-radius: 5px;
             margin: 2rem 0;
         }
+
+        /* --- Language Dropdown Styles FIX --- */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            margin: 0 0.5rem 0.5rem 0;
+        }
+
+        .dropdown-btn {
+            background: white;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dropdown-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
         
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 10px;
+            top: 100%; 
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 10px;
+            max-height: 250px;
+            overflow-y: auto;
+        }
+
+        /* FIX: The hover state should be on the parent .dropdown to prevent the menu from disappearing */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        /* FIX: Add a small gap between button and dropdown to prevent accidental mouseout */
+        .dropdown-content::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 0;
+            width: 100%;
+            height: 10px;
+        }
+        
+        .dropdown-content a {
+            color: var(--dark);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            transition: background-color 0.5s ease;
+            white-space: nowrap;
+        }
+        
+        .dropdown-content a:hover {
+            background-color: var(--light);
+            color: var(--primary);
+        }
+
+        /* --- Responsive Styles --- */
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
@@ -375,6 +447,28 @@
             <button class="filter-btn" data-filter="video">Videos</button>
             <button class="filter-btn" data-filter="audio">Audio</button>
             <button class="filter-btn" data-filter="guide">Guides</button>
+
+            <div class="dropdown">
+                <button class="dropdown-btn">
+                    <span>Select Languages</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    <a href="#" data-lang="all">All Languages</a>
+                    <a href="#" data-lang="english">English</a>
+                    <a href="#" data-lang="hindi">Hindi</a>
+                    <a href="#" data-lang="bengali">Bengali</a>
+                    <a href="#" data-lang="telugu">Telugu</a>
+                    <a href="#" data-lang="marathi">Marathi</a>
+                    <a href="#" data-lang="tamil">Tamil</a>
+                    <a href="#" data-lang="gujarati">Gujarati</a>
+                    <a href="#" data-lang="kannada">Kannada</a>
+                    <a href="#" data-lang="malayalam">Malayalam</a>
+                    <a href="#" data-lang="punjabi">Punjabi</a>
+                    <a href="#" data-lang="odia">Odia</a>
+                    <a href="#" data-lang="assamese">Assamese</a>
+                </div>
+            </div>
         </div>
         
         <div class="resources" id="resource-container">
@@ -409,7 +503,6 @@
     </footer>
 
     <script>
-        // DOM Elements
         const resourceContainer = document.getElementById('resource-container');
         const player = document.getElementById('player');
         const playerThumb = document.getElementById('player-thumb');
@@ -418,40 +511,56 @@
         const playPauseBtn = document.getElementById('play-pause');
         const closePlayerBtn = document.getElementById('close-player');
         const filterBtns = document.querySelectorAll('.filter-btn');
+        const languageDropdown = document.querySelector('.dropdown-content');
+        const dropdownBtnText = document.querySelector('.dropdown-btn span');
         
-        // Audio context for playing audio files
         let audioContext = null;
         let audioBuffer = null;
         let audioSource = null;
         let isPlaying = false;
         let currentAudio = null;
         
-        // Fetch resources from FastAPI backend
-        async function loadResources() {
-            try {
-                const response = await fetch('http://localhost:8000/resources');
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+        const allResources = [
+           { id: 1, title: 'Mindful Breathing', description: 'A short guide to mindful breathing.', type: 'guide', language: 'english', url: '#', thumbnail: 'https://www.mindful.org/content/uploads/Meditation-Mindfulness-1-1024x640.jpg' },
+{ id: 2, title: 'Guided Meditation', description: 'A relaxing audio meditation.', type: 'audio', language: 'hindi', url: '#', thumbnail: 'https://www.shutterstock.com/image-vector/deep-breath-mindfulness-concept-woman-260nw-2497488045.jpg' },
+{ id: 3, title: 'Managing Stress', description: 'Video tips to manage daily stress.', type: 'video', language: 'english', url: '#', thumbnail: 'https://thumbs.dreamstime.com/b/professional-stress-management-work-cartoon-subordinate-laughs-boss-anger-managing-emotions-workplace-resolves-conflict-149996769.jpg' },
+{ id: 4, title: 'Journaling for Anxiety', description: 'A guide on how to use journaling.', type: 'guide', language: 'hindi', url: '#', thumbnail: 'https://gocalmer.com/images/woman-with-a-journal.jpeg' },
+{ id: 5, title: 'Peaceful Sleep Music', description: 'Music to help you fall asleep.', type: 'audio', language: 'english', url: '#', thumbnail: 'https://thumbs.dreamstime.com/b/person-illustrated-sleeping-bed-wearing-smartwatch-displays-heart-rate-other-health-data-room-softly-lit-396695210.jpg' },
+{ id: 6, title: 'Yoga for Calmness', description: 'Simple yoga poses for relaxation.', type: 'video', language: 'bengali', url: '#', thumbnail: 'https://static.vecteezy.com/system/resources/previews/024/620/959/non_2x/yoga-meditation-mindfulness-relaxation-and-inner-peace-serene-calm-woman-enjoying-meditation-in-nature-while-her-eyes-closed-breathing-exercises-with-hands-in-zen-gesture-concept-illustration-vector.jpg' },
+{ id: 7, title: 'Coping with Depression', description: 'A short guide to coping mechanisms.', type: 'guide', language: 'telugu', url: '#', thumbnail: 'https://click2pro.com/media/blog/74dd755258738135ac18558a69faaa01.jpg' },
+{ id: 8, title: 'Breathing Exercises', description: 'Simple breathing exercises for quick relief.', type: 'audio', language: 'marathi', url: '#', thumbnail: 'https://lirp.cdn-website.com/056e16c2/dms3rep/multi/opt/Deep+Breathing+Exercises+3-640w.png' },
+{ id: 9, title: 'Healthy Mindset', description: 'A video about building a positive mindset.', type: 'video', language: 'tamil', url: '#', thumbnail: 'https://img.freepik.com/premium-vector/mental-health-concept-woman-with-mind-healthy-icons-illustration-design_24877-66811.jpg' },
+{ id: 10, title: 'Managing Overthinking', description: 'Guide to stop overthinking.', type: 'guide', language: 'gujarati', url: '#', thumbnail: 'https://c8.alamy.com/comp/2WP8YF6/anxiety-character-mental-health-issues-woman-coping-with-psychological-stress-mental-disorder-emotional-and-physical-symptom-flat-vector-illustration-2WP8YF6.jpg' },
+{ id: 11, title: 'Relaxing Rain Sounds', description: 'Audio for a relaxing atmosphere.', type: 'audio', language: 'kannada', url: '#', thumbnail: 'https://blenderartists.org/uploads/default/optimized/4X/f/4/b/f4b2c7eb7a8bf328098b9481872fadb9e57ffb26_2_1024x1024.jpeg' },
+{ id: 12, title: 'Self-Care Tips', description: 'A video on simple self-care routines.', type: 'video', language: 'malayalam', url: '#', thumbnail: 'https://media.licdn.com/dms/image/v2/D4D12AQHTtPVP_3J3Jw/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1687946240654?e=2147483647&v=beta&t=DHjvqt6_QkzZMMYGt8FkQ26By7e_vO_1XjekI6wR7Uc' },
+{ id: 13, title: 'Gratitude Journal', description: 'A guide to starting a gratitude journal.', type: 'guide', language: 'punjabi', url: '#', thumbnail: 'https://media.istockphoto.com/id/1488247074/vector/learning-and-reading-concept.jpg?s=612x612&w=0&k=20&c=qPiVkW4bjR4xJ-iugnBub-OGL8HA4D2u6d0DcwS0V3g=' },
+{ id: 14, title: 'Calmness Meditation', description: 'A deep meditation audio for calmness.', type: 'audio', language: 'odia', url: '#', thumbnail: 'https://static.vecteezy.com/system/resources/previews/024/620/959/non_2x/yoga-meditation-mindfulness-relaxation-and-inner-peace-serene-calm-woman-enjoying-meditation-in-nature-while-her-eyes-closed-breathing-exercises-with-hands-in-zen-gesture-concept-illustration-vector.jpg' },
+{ id: 15, title: 'Emotional Regulation', description: 'Video on how to regulate emotions.', type: 'video', language: 'assamese', url: '#', thumbnail: 'https://lindsaybraman.com/wp-content/uploads/2021/03/LB-2021-Rainbow-Regulation-SEL-SlidesB-2.png' }
+
+        ];
+
+        let currentResources = [];
+        let currentLanguage = 'all';
+
+        function loadResources(language = 'all') {
+            resourceContainer.innerHTML = `<div class="loading"><i class="fas fa-spinner fa-spin"></i> Loading resources...</div>`;
+            setTimeout(() => {
+                let filteredResources = allResources;
+                if (language !== 'all') {
+                    filteredResources = allResources.filter(resource => resource.language === language);
                 }
-                const resources = await response.json();
+                currentResources = filteredResources;
+                displayResources(currentResources);
+                currentLanguage = language;
                 
-                displayResources(resources);
-            } catch (error) {
-                console.error('Error loading resources:', error);
-                resourceContainer.innerHTML = `
-                    <div class="error">
-                        <i class="fas fa-exclamation-circle"></i>
-                        <p>Failed to load resources. Please make sure the backend server is running.</p>
-                        <button class="btn" onclick="loadResources()">Try Again</button>
-                    </div>
-                `;
-            }
+                const langName = language.charAt(0).toUpperCase() + language.slice(1);
+                dropdownBtnText.textContent = language === 'all' ? 'Select Languages' : langName;
+            }, 500);
         }
-        
-        // Display resources in the grid
+
         function displayResources(resources) {
             if (resources.length === 0) {
-                resourceContainer.innerHTML = '<div class="error">No resources found.</div>';
+                resourceContainer.innerHTML = '<div class="error">No resources found for this language.</div>';
                 return;
             }
             
@@ -466,7 +575,7 @@
                         <img src="${resource.thumbnail}" alt="${resource.title}">
                     </div>
                     <div class="card-content">
-                        <span class="language">${resource.language}</span>
+                        <span class="language">${resource.language.charAt(0).toUpperCase() + resource.language.slice(1)}</span>
                         <h3>${resource.title}</h3>
                         <p>${resource.description}</p>
                         <button class="btn play-btn" data-id="${resource.id}">
@@ -478,11 +587,10 @@
                 resourceContainer.appendChild(card);
             });
             
-            // Add event listeners to play buttons
             document.querySelectorAll('.play-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const resourceId = this.getAttribute('data-id');
-                    const resource = resources.find(r => r.id == resourceId);
+                    const resource = currentResources.find(r => r.id == resourceId);
                     
                     if (resource) {
                         if (resource.type === 'audio') {
@@ -495,35 +603,27 @@
             });
         }
         
-        // Play audio resource
         function playAudio(resource) {
-            // Stop currently playing audio if any
             if (currentAudio) {
                 stopAudio();
             }
             
-            // Initialize audio context if not already done
             if (!audioContext) {
                 audioContext = new (window.AudioContext || window.webkitAudioContext)();
             }
             
-            // Show player
             player.classList.add('active');
             playerThumb.src = resource.thumbnail;
             playerTitle.textContent = resource.title;
             playerDesc.textContent = resource.description;
             
-            // For demo purposes, we'll simulate playing audio
-            // In a real application, you would fetch and decode the actual audio file
             isPlaying = true;
             playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
             currentAudio = resource;
             
-            // Simulate audio playback (would be replaced with actual audio processing)
             console.log(`Playing audio: ${resource.title}`);
         }
         
-        // Stop currently playing audio
         function stopAudio() {
             if (audioSource) {
                 audioSource.stop();
@@ -533,19 +633,11 @@
             playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
         }
         
-        // Open resource (for videos and guides)
         function openResource(resource) {
-            if (resource.type === 'video') {
-                // For demo purposes, we'll open the URL in a new tab
-                window.open(resource.url, '_blank');
-            } else if (resource.type === 'guide') {
-                // For demo purposes, we'll open the URL in a new tab
-                window.open(resource.url, '_blank');
-            }
+            window.open(resource.url, '_blank');
         }
         
-        // Filter resources by type
-        function filterResources(type) {
+        function filterResourcesByType(type) {
             const cards = document.querySelectorAll('.resource-card');
             
             cards.forEach(card => {
@@ -557,12 +649,10 @@
             });
         }
         
-        // Event Listeners
         playPauseBtn.addEventListener('click', function() {
             if (isPlaying) {
                 stopAudio();
             } else if (currentAudio) {
-                // Resume audio
                 isPlaying = true;
                 playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
                 console.log(`Resuming audio: ${currentAudio.title}`);
@@ -580,12 +670,21 @@
                 filterBtns.forEach(b => b.classList.remove('active'));
                 this.classList.add('active');
                 const filter = this.getAttribute('data-filter');
-                filterResources(filter);
+                filterResourcesByType(filter);
             });
         });
-        
-        // Initialize page
-        document.addEventListener('DOMContentLoaded', loadResources);
+
+        languageDropdown.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const selectedLanguage = this.getAttribute('data-lang');
+                filterBtns.forEach(b => b.classList.remove('active'));
+                document.querySelector('[data-filter="all"]').classList.add('active');
+                loadResources(selectedLanguage);
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', () => loadResources());
     </script>
 </body>
 </html>

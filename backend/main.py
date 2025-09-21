@@ -7,7 +7,7 @@ from typing import List
 import uuid
 import os
 
-app = FastAPI(title="MindWell API", description="API for Mental Wellness Resources")
+app = FastAPI(title="MindEase API", description="API for Mental Wellness Resources")
 
 # Enable CORS for frontend communication
 app.add_middleware(
@@ -21,9 +21,9 @@ app.add_middleware(
 # Serve static files (HTML, CSS, JS)
 app.mount("/static", StaticFiles(directory="."), name="static")
 
-# Resource model
+# Resource model - updated to match frontend structure
 class Resource(BaseModel):
-    id: str
+    id: int
     title: str
     description: str
     type: str  # video, audio, guide
@@ -31,85 +31,148 @@ class Resource(BaseModel):
     url: str
     thumbnail: str
 
-# Sample data
+# Sample data from frontend
 resources_data = [
     {
-        "id": str(uuid.uuid4()),
-        "title": "Mindfulness Meditation Guide",
-        "description": "A 10-minute guided meditation for beginners to practice mindfulness.",
-        "type": "audio",
-        "language": "English",
-        "url": "https://example.com/audio/meditation.mp3",
+        "id": 1,
+        "title": "Mindful Breathing",
+        "description": "A short guide to mindful breathing.",
+        "type": "guide",
+        "language": "english",
+        "url": "#",
         "thumbnail": "https://www.mindful.org/content/uploads/Meditation-Mindfulness-1-1024x640.jpg"
     },
     {
-        "id": str(uuid.uuid4()),
-        "title": "Yoga for Stress Relief",
-        "description": "A gentle yoga sequence to release tension and reduce stress.",
-        "type": "video",
-        "language": "Hindi",
-        "url": "https://www.youtube.com/watch?v=q-ueboQo_jU",
-        "thumbnail": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
-    },
-    {
-        "id": str(uuid.uuid4()),
-        "title": "Understanding Anxiety",
-        "description": "A comprehensive guide to understanding and managing anxiety.",
-        "type": "guide",
-        "language": "English",
-        "url": "https://www.samh.org.uk/documents/SAMH_Understanding_anxiety%2C_e-use.pdf",
-        "thumbnail": "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
-    },
-    {
-        "id": str(uuid.uuid4()),
-        "title": "Deep Breathing Exercises",
-        "description": "Learn breathing techniques to calm your nervous system.",
+        "id": 2,
+        "title": "Guided Meditation",
+        "description": "A relaxing audio meditation.",
         "type": "audio",
-        "language": "Telugu",
-        "url": "https://example.com/audio/breathing.mp3",
-        "thumbnail": "https://www.bhf.org.uk/-/media/images/information-support/heart-matters/2023/december/wellbeing/deep-breathing-620x400.png?rev=4506ebd34dab4476b56c225b6ff3ad60&la=en&h=400&w=620&hash=725D49F995EDEA5C3934CB671E023CA2"
+        "language": "hindi",
+        "url": "#",
+        "thumbnail": "https://www.shutterstock.com/image-vector/deep-breath-mindfulness-concept-woman-260nw-2497488045.jpg"
     },
     {
-        "id": str(uuid.uuid4()),
-        "title": "Cognitive Behavioral Therapy Basics",
-        "description": "Introduction to CBT techniques for negative thought patterns.",
+        "id": 3,
+        "title": "Managing Stress",
+        "description": "Video tips to manage daily stress.",
         "type": "video",
-        "language": "English",
-        "url": "https://www.youtube.com/watch?v=vpeLcMdmKek",
-        "thumbnail": "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+        "language": "english",
+        "url": "#",
+        "thumbnail": "https://thumbs.dreamstime.com/b/professional-stress-management-work-cartoon-subordinate-laughs-boss-anger-managing-emotions-workplace-resolves-conflict-149996769.jpg"
     },
     {
-        "id": str(uuid.uuid4()),
-        "title": "Sleep Hygiene Guide",
-        "description": "Tips and practices for improving your sleep quality.",
+        "id": 4,
+        "title": "Journaling for Anxiety",
+        "description": "A guide on how to use journaling.",
         "type": "guide",
-        "language": "English",
-        "url": "https://www.cci.health.wa.gov.au/~/media/CCI/Mental-Health-Professionals/Sleep/Sleep---Information-Sheets/Sleep-Information-Sheet---04---Sleep-Hygiene.pdf",
-        "thumbnail": "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+        "language": "hindi",
+        "url": "#",
+        "thumbnail": "https://gocalmer.com/images/woman-with-a-journal.jpeg"
     },
     {
-        "id": str(uuid.uuid4()),
-        "title": "Morning Meditation for Clarity",
-        "description": "Start your day with a clear mind and positive energy.",
+        "id": 5,
+        "title": "Peaceful Sleep Music",
+        "description": "Music to help you fall asleep.",
         "type": "audio",
-        "language": "Kannada",
-        "url": "https://example.com/audio/morning.mp3",
-        "thumbnail": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+        "language": "english",
+        "url": "#",
+        "thumbnail": "https://thumbs.dreamstime.com/b/person-illustrated-sleeping-bed-wearing-smartwatch-displays-heart-rate-other-health-data-room-softly-lit-396695210.jpg"
     },
     {
-        "id": str(uuid.uuid4()),
-        "title": "Managing Depression",
-        "description": "Strategies for coping with depressive thoughts and feelings.",
+        "id": 6,
+        "title": "Yoga for Calmness",
+        "description": "Simple yoga poses for relaxation.",
         "type": "video",
-        "language": "English",
-        "url": "https://www.youtube.com/watch?v=MQB3UUTh8aQ",
-        "thumbnail": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+        "language": "bengali",
+        "url": "#",
+        "thumbnail": "https://static.vecteezy.com/system/resources/previews/024/620/959/non_2x/yoga-meditation-mindfulness-relaxation-and-inner-peace-serene-calm-woman-enjoying-meditation-in-nature-while-her-eyes-closed-breathing-exercises-with-hands-in-zen-gesture-concept-illustration-vector.jpg"
+    },
+    {
+        "id": 7,
+        "title": "Coping with Depression",
+        "description": "A short guide to coping mechanisms.",
+        "type": "guide",
+        "language": "telugu",
+        "url": "#",
+        "thumbnail": "https://click2pro.com/media/blog/74dd755258738135ac18558a69faaa01.jpg"
+    },
+    {
+        "id": 8,
+        "title": "Breathing Exercises",
+        "description": "Simple breathing exercises for quick relief.",
+        "type": "audio",
+        "language": "marathi",
+        "url": "#",
+        "thumbnail": "https://lirp.cdn-website.com/056e16c2/dms3rep/multi/opt/Deep+Breathing+Exercises+3-640w.png"
+    },
+    {
+        "id": 9,
+        "title": "Healthy Mindset",
+        "description": "A video about building a positive mindset.",
+        "type": "video",
+        "language": "tamil",
+        "url": "#",
+        "thumbnail": "https://img.freepik.com/premium-vector/mental-health-concept-woman-with-mind-healthy-icons-illustration-design_24877-66811.jpg"
+    },
+    {
+        "id": 10,
+        "title": "Managing Overthinking",
+        "description": "Guide to stop overthinking.",
+        "type": "guide",
+        "language": "gujarati",
+        "url": "#",
+        "thumbnail": "https://c8.alamy.com/comp/2WP8YF6/anxiety-character-mental-health-issues-woman-coping-with-psychological-stress-mental-disorder-emotional-and-physical-symptom-flat-vector-illustration-2WP8YF6.jpg"
+    },
+    {
+        "id": 11,
+        "title": "Relaxing Rain Sounds",
+        "description": "Audio for a relaxing atmosphere.",
+        "type": "audio",
+        "language": "kannada",
+        "url": "#",
+        "thumbnail": "https://blenderartists.org/uploads/default/optimized/4X/f/4/b/f4b2c7eb7a8bf328098b9481872fadb9e57ffb26_2_1024x1024.jpeg"
+    },
+    {
+        "id": 12,
+        "title": "Self-Care Tips",
+        "description": "A video on simple self-care routines.",
+        "type": "video",
+        "language": "malayalam",
+        "url": "#",
+        "thumbnail": "https://media.licdn.com/dms/image/v2/D4D12AQHTtPVP_3J3Jw/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1687946240654?e=2147483647&v=beta&t=DHjvqt6_QkzZMMYGt8FkQ26By7e_vO_1XjekI6wR7Uc"
+    },
+    {
+        "id": 13,
+        "title": "Gratitude Journal",
+        "description": "A guide to starting a gratitude journal.",
+        "type": "guide",
+        "language": "punjabi",
+        "url": "#",
+        "thumbnail": "https://media.istockphoto.com/id/1488247074/vector/learning-and-reading-concept.jpg?s=612x612&w=0&k=20&c=qPiVkW4bjR4xJ-iugnBub-OGL8HA4D2u6d0DcwS0V3g="
+    },
+    {
+        "id": 14,
+        "title": "Calmness Meditation",
+        "description": "A deep meditation audio for calmness.",
+        "type": "audio",
+        "language": "odia",
+        "url": "#",
+        "thumbnail": "https://static.vecteezy.com/system/resources/previews/024/620/959/non_2x/yoga-meditation-mindfulness-relaxation-and-inner-peace-serene-calm-woman-enjoying-meditation-in-nature-while-her-eyes-closed-breathing-exercises-with-hands-in-zen-gesture-concept-illustration-vector.jpg"
+    },
+    {
+        "id": 15,
+        "title": "Emotional Regulation",
+        "description": "Video on how to regulate emotions.",
+        "type": "video",
+        "language": "assamese",
+        "url": "#",
+        "thumbnail": "https://lindsaybraman.com/wp-content/uploads/2021/03/LB-2021-Rainbow-Regulation-SEL-SlidesB-2.png"
     }
 ]
 
 @app.get("/")
 async def read_root():
-    # Compute absolute path to resources.html in the root folder
+    
     file_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "root", "resources.html")
     if os.path.exists(file_path):
         return FileResponse(file_path)
@@ -120,7 +183,7 @@ async def get_resources():
     return resources_data
 
 @app.get("/resources/{resource_id}")
-async def get_resource(resource_id: str):
+async def get_resource(resource_id: int):
     for resource in resources_data:
         if resource["id"] == resource_id:
             return resource
